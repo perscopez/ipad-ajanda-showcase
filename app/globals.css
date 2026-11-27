@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* ── Pastel tema: tüm uygulama bu token'ları kullanır ─────────────────────── */
+@theme {
+  /* Bubblegum teması (21st.dev) */
+  --color-cream: oklch(0.94 0.02 345.698); /* arka plan */
+  --color-cream-deep: color-mix(in srgb, var(--color-cream) 91%, black);
+  --color-paper: oklch(0.95 0.05 86.889); /* kart */
+  --color-ink: oklch(0.321 0 0);
+  --color-ink-soft: color-mix(in srgb, var(--color-ink) 62%, var(--color-cream));
+  --color-line: color-mix(in srgb, var(--color-primary) 42%, transparent);
+
+  --color-primary: oklch(0.621 0.18 348.139);
+  --color-primary-foreground: oklch(1 0 0);
+  --color-rose: color-mix(in srgb, var(--color-primary) 45%, white);
+  --color-rose-soft: color-mix(in srgb, var(--color-primary) 16%, white);
+  --color-peach: oklch(0.9 0.07 60);
+  --color-butter: oklch(0.919 0.08 87.667);
+  --color-mint: oklch(0.88 0.07 165);
+  --color-sky: oklch(0.81 0.069 198.186);
+  --color-lilac: oklch(0.86 0.08 305);
+
+  --font-sans: "Poppins", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-soft: 3px 3px 0 0 color-mix(in srgb, var(--color-primary) 55%, transparent);
+  --shadow-lift: 5px 5px 0 0 color-mix(in srgb, var(--color-primary) 55%, transparent);
+
+  --animate-pop: pop 0.38s var(--ease-soft) both;
+  --animate-fade: fade 0.3s ease both;
+  --animate-rise: rise 0.55s var(--ease-soft) both;
+  --animate-sheet: sheet 0.45s var(--ease-soft) both;
+  --animate-screen: screen 0.5s var(--ease-soft) both;
+  --animate-float: float 5s ease-in-out infinite;
+
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.92) translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes sheet {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes screen {
+    from { opacity: 0; transform: scale(0.985) translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+}
+
+/* Dokunma geri bildirimi: her buton aynı yumuşak basılma hissini verir */
+@utility press {
+  transition: transform 0.28s var(--ease-soft), box-shadow 0.28s var(--ease-soft), background-color 0.2s ease, opacity 0.2s ease;
+  &:active { transform: translate(2px, 2px) scale(0.98); box-shadow: 1px 1px 0 0 color-mix(in srgb, var(--color-primary) 55%, transparent); }
+}
+
+/* Kart gibi yükselen öğeler */
+@utility lift {
+  transition: transform 0.45s var(--ease-soft), box-shadow 0.45s var(--ease-soft);
+  &:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-lift); }
+  &:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 0 color-mix(in srgb, var(--color-primary) 55%, transparent); }
+}
+
+html, body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+button { cursor: pointer; touch-action: manipulation; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
